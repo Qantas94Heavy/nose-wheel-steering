@@ -8,9 +8,9 @@
 	       [  "http://gefs-online.com/gefs.php*"
 	       ,  "http://www.gefs-online.com/gefs.php*" ]
 	   , "js":
-		   [ "script.js" ]
+		   [ "loader.js" ]
 	   , "run_at": "document_end"
 	   }
 	]
-, "web_accessible_resources": [ "nws.js" ]
+, "web_accessible_resources": [ "code.user.js" ]
 }
