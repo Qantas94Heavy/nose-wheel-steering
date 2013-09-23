@@ -1,0 +1,1 @@
+{"manifest_version":2,"name":"Autopilot++ for GEFS-Online","description":"This extension (by Qantas 94 Heavy) takes the GEFS autopilot to the next level!","version":"0.3.0.13","content_scripts":[{"matches":["http://gefs-online.com/gefs.php*","http://www.gefs-online.com/gefs.php*"],"js":["s.js"],"run_at":"document_end"}]}
