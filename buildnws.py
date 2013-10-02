@@ -10,7 +10,7 @@ args = parser.parse_args()
 node = 'C:/Web Server/nodejs/node.exe'
 uglifyjs = 'C:/Users/Karl Cheng/node_modules/uglify-js/bin/uglifyjs'
 base = 'C:/Users/Karl Cheng/Desktop/Dropbox/GitHub/gefs-plugins/'
-root = base + 'nose-wheel-steering/'
+root = base + 'nose_wheel_steering/'
 setup = 'gefs_nws-setup'
 file = subprocess.check_output([node, uglifyjs, root + 'code.user.js', '--source-map-output=true', '--source-map-inline=false', '-c'], shell=False).decode('cp850').replace('\uFEFF', r'\uFEFF').replace("'", "\\'").replace('\n', '').rstrip(';')
 parts = file.split('\u0004')
@@ -56,7 +56,7 @@ else:
 	
 print(extension)
 
-pack = base + 'Packages/' + extension + '/'
+pack = base + 'package/' + extension + '/'
 try: 
     shutil.rmtree(pack)
 except OSError:
