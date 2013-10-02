@@ -1,7 +1,7 @@
 README
 ------
 
-GEFS Nose Wheel Steering Plugin v0.1.1.15 for Google Chrome/Chromium 28+
+GEFS Nose Wheel Steering Plugin v0.1.2.11 for Google Chrome/Chromium 28+
 
 INSTALLATION INSTRUCTIONS
 -------------------------
@@ -13,7 +13,12 @@ INSTALLATION INSTRUCTIONS
 6. Click "Accept" when it asks for permissions.
 7. Installed!  Just open GEFS and try pressing the Z and X buttons! :D
 
-CHANGES SINCE LAST VERSION (v0.1.0.1002)
+CHANGES SINCE LAST VERSION (v0.1.1)
 ----------------------------------------
+
+ - Fixed assortment of bugs, some internal improvements (refactoring)
+
+CHANGES SINCE v0.1.0
+--------------------
 
  - Fixed conflict with Autopilot++ (formerly called Great Circle Plugin)

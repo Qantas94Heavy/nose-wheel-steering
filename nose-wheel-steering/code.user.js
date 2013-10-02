@@ -2,7 +2,8 @@
 // @name GEFS-Online Steering Addon (seperate rudder/nosewheel steering)
 // @description This extension (by Qantas 94 Heavy) allows rudder to be used without steering the nosewheel significantly.
 // @namespace http://www.eyredaero.frihost.org
-// @include /^http://(www\.)?gefs-online\.com/gefs\.php.*$/
+// @match http://www.gefs-online.com/gefs.php*
+// @match http://gefs-online.com/gefs.php*
 // @run-at document-end
 // @version 0.1.2.10
 // @grant none
@@ -233,6 +234,7 @@
 	var a = setInterval(function ()
 	{	if (typeof jQuery === 'function')
 		{	var $ = jQuery;
+			// hijack on function so that we can intercept any control events being setup
 			$.fn.on = function ()
 			{	var on = $.fn.on;
 				return function (type, fn) // only two arguments passed by controls.init
