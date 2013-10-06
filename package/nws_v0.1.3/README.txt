@@ -1,7 +1,7 @@
 README
 ------
 
-GEFS Nose Wheel Steering Plugin v{0} for Google Chrome/Chromium 28+
+GEFS Nose Wheel Steering Plugin v0.1.3.0 for Google Chrome/Chromium 28+
 
 INSTALLATION INSTRUCTIONS
 -------------------------
