@@ -2,7 +2,8 @@ LICENSE
 =======
   
 Plugins for GEFS-Online -- improving the GEFS experience for everyone.  
-Copyright © 2013 Karl Cheng
+GEFS Code: Copyright © 2011 Xavier Tassin
+All other parts: Copyright © 2013 Karl Cheng
 
 This program is free software: you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software
