@@ -10,47 +10,48 @@
 // ==/UserScript==
 
 (function ()
-{	var controlEvents = 
+{	'use strict';
+	var controlEvents = 
 		{ keyDown: function (event) // TODO: refactor function in a more modular way, FIXME: mozilla keycodes issue
 			{	var keys = ges.preferences.keyboard.keys;
 				switch (event.which)
 				{	case keys['Bank left'].keycode:
 						controls.states.left = true;
-						event.returnValue = false;
+						event.preventDefault ? event.preventDefault() : event.returnValue = false;
 						controls.keyboard.override = true;
 						return;
 					case keys['Bank right'].keycode:
 						controls.states.right = true;
-						event.returnValue = false;
+						event.preventDefault ? event.preventDefault() : event.returnValue = false;
 						controls.keyboard.override = true;
 						return;
 					case keys['Pitch down'].keycode:
 						controls.states.up = true;
-						event.returnValue = false;
+						event.preventDefault ? event.preventDefault() : event.returnValue = false;
 						controls.keyboard.override = true;
 						return;
 					case keys['Pitch up'].keycode:
 						controls.states.down = true;
-						event.returnValue = false;
+						event.preventDefault ? event.preventDefault() : event.returnValue = false;
 						controls.keyboard.override = true;
 						return;
 					case keys['Steer left'].keycode:
 						controls.states.rudderLeft = true;
-						event.returnValue = false;
+						event.preventDefault ? event.preventDefault() : event.returnValue = false;
 						return;
 					case keys['Steer right'].keycode:
 						controls.states.rudderRight = true;
-						event.returnValue = false;
+						event.preventDefault ? event.preventDefault() : event.returnValue = false;
 						return;
 					case keys['Increase throttle'].keycode:
 					case keys.PgUp.keycode:
 						controls.states.increaseThrottle = true;
-						event.returnValue = false;
+						event.preventDefault ? event.preventDefault() : event.returnValue = false;
 						return;
 					case keys['Decrease throttle'].keycode:
 					case keys.PgDwn.keycode:
 						controls.states.decreaseThrottle = true;
-						event.returnValue = false;
+						event.preventDefault ? event.preventDefault() : event.returnValue = false;
 						return;
 					case keys.Brakes.keycode:
 						controls.setters.setBrakes.set();
@@ -161,11 +162,11 @@
 					// nose wheel steering
 					case 90: // Z
 						controls.states.steerLeft = true;
-						event.returnValue = false;
+						event.preventDefault ? event.preventDefault() : event.returnValue = false;
 						return;
 					case 88: // X
 						controls.states.steerRight = true;
-						event.returnValue = false;
+						event.preventDefault ? event.preventDefault() : event.returnValue = false;
 						return;
 				}
 				if (event.which > 47 && event.which < 58) controls.throttle = (event.which - 48) / 9; // range 48-57
@@ -174,37 +175,37 @@
 			{	switch (event.which)
 				{	case ges.preferences.keyboard.keys['Bank left'].keycode:
 						controls.states.left = false;
-						event.returnValue = false;
+						event.preventDefault ? event.preventDefault() : event.returnValue = false;
 						break;
 					case ges.preferences.keyboard.keys['Bank right'].keycode:
 						controls.states.right = false;
-						event.returnValue = false;
+						event.preventDefault ? event.preventDefault() : event.returnValue = false;
 						break;
 					case ges.preferences.keyboard.keys['Pitch down'].keycode:
 						controls.states.up = false;
-						event.returnValue = false;
+						event.preventDefault ? event.preventDefault() : event.returnValue = false;
 						break;
 					case ges.preferences.keyboard.keys['Pitch up'].keycode:
 						controls.states.down = false;
-						event.returnValue = false;
+						event.preventDefault ? event.preventDefault() : event.returnValue = false;
 						break;
 					case ges.preferences.keyboard.keys['Steer left'].keycode:
 						controls.states.rudderLeft = false;
-						event.returnValue = false;
+						event.preventDefault ? event.preventDefault() : event.returnValue = false;
 						break;
 					case ges.preferences.keyboard.keys['Steer right'].keycode:
 						controls.states.rudderRight = false;
-						event.returnValue = false;
+						event.preventDefault ? event.preventDefault() : event.returnValue = false;
 						break;
 					case ges.preferences.keyboard.keys['Increase throttle'].keycode:
 					case ges.preferences.keyboard.keys.PgUp.keycode:
 						controls.states.increaseThrottle = false;
-						event.returnValue = false;
+						event.preventDefault ? event.preventDefault() : event.returnValue = false;
 						break;
 					case ges.preferences.keyboard.keys['Decrease throttle'].keycode:
 					case ges.preferences.keyboard.keys.PgDwn.keycode:
 						controls.states.decreaseThrottle = false;
-						event.returnValue = false;
+						event.preventDefault ? event.preventDefault() : event.returnValue = false;
 						break;
 					case ges.preferences.keyboard.keys['Elevator trim up'].keycode:
 						controls.setters.setElevatorTrimUp.unset();
@@ -221,11 +222,11 @@
 					// nose wheel steering add-on
 					case 90: // Z
 						controls.states.steerLeft = false;
-						event.returnValue = false;
+						event.preventDefault ? event.preventDefault() : event.returnValue = false;
 						break;
 					case 88: // X
 						controls.states.steerRight = false;
-						event.returnValue = false;
+						event.preventDefault ? event.preventDefault() : event.returnValue = false;
 						break;	
 				}
 			}
@@ -234,13 +235,15 @@
 	var a = setInterval(function ()
 	{	if (typeof jQuery === 'function')
 		{	var $ = jQuery;
-			// hijack on function so that we can intercept any control events being setup
+			// hijack "on" function so that we can intercept any control events being setup
 			$.fn.on = function ()
 			{	var on = $.fn.on;
 				return function (type, fn) // only two arguments passed by controls.init
 				{	for (var i in controlEvents)
 					{	if (!controlEvents.hasOwnProperty(i)) continue;
+						/* jshint -W104*/ // bug(?) with JSHint that says that the following line is destructuring assignment (it's not)
 						if (fn === controls[i]) return on.apply(this, [ type, controls[i] = controlEvents[i] ]);
+						/* jshint -W104*/
 					}
 					return on.apply(this, arguments);
 				};
@@ -250,72 +253,73 @@
 	});
 
 	var b = setInterval(function ()
-	{	if (typeof Aircraft === 'function')
+	{	function noseWheelSteering(aircraftName, kmlObjects)
+		{	if (ges.aircraft.kmlObjects === kmlObjects) // kmlObjects hasn't been replaced yet, i.e. ges.aircraft.load hasn't completed
+			{	setTimeout(function () { noseWheelSteering(aircraftName, kmlObjects); }, 50); // come again later
+				return;
+			}
+			var ratio;
+			function set(noseWheel, tillerNoseAngle, rudderNoseAngle, lockoutSpeed)
+			{	return function ()
+				{	var anim = ges.aircraft.wheels[noseWheel].animations[0];
+					anim.value = 'steeringAngle';
+					ratio = rudderNoseAngle / (anim.ratio = tillerNoseAngle);
+				};
+			}
+			var aircrafts = 
+				{ a380: set(4, 75, 7)
+				, md11: set(3, 70, 10)
+				, cessna: set(2, 30, 8.5)
+				, AN140: set(2, 35, 5) // <-- review the settings for this aircraft
+				, concorde: set(2, 60, 10) 
+				, su35: set(4, 45, 5)
+				, dc3: set(0, -45, -3) 
+				, alphajet: set(2, 35, 5)
+				, zlin: set(2, -30, -2) };
+			(aircrafts[aircraftName] || function () { ratio = 1; })();
+			controls.nwAngle = 0;
+			controls.updateKeyboardGeneral = function (dt)
+			{	var throttleIncrement = controls.keyboard.throttleIncrement * dt;
+				if (controls.states.increaseThrottle) controls.throttle += throttleIncrement;
+				else if (controls.states.decreaseThrottle) controls.throttle -= throttleIncrement;
+				
+				var sensitivity = ges.preferences.keyboard.sensitivity * ges.aircraft.controllers.yaw.sensitivity;
+				var yawIncrement = controls.keyboard.yawIncrement * dt * sensitivity * ges.aircraft.controllers.yaw.ratio;
+				
+				var notSteering = false;
+				if (controls.states.steerLeft) controls.nwAngle = clamp(controls.nwAngle - yawIncrement, -1, 1);
+				else if (controls.states.steerRight) controls.nwAngle = clamp(controls.nwAngle + yawIncrement, -1, 1);
+				else notSteering = true;
+
+				if (controls.states.rudderLeft)
+				{	controls.yaw -= yawIncrement;
+					if (notSteering)
+						// let nose wheel recentre if nose position beyond max rudder steering
+						if (Math.abs(controls.nwAngle) < ratio) controls.nwAngle = clamp(controls.nwAngle - yawIncrement * ratio, -ratio, ratio);
+						else controls.nwAngle -= controls.nwAngle * controls.keyboard.recenterRatio * sensitivity;
+				} else if (controls.states.rudderRight)
+				{	controls.yaw += yawIncrement;
+					if (notSteering)
+						// let nose wheel recentre if nose position beyond max rudder steering
+						if (Math.abs(controls.nwAngle) < ratio) controls.nwAngle = clamp(controls.nwAngle + yawIncrement * ratio, -ratio, ratio);
+						else controls.nwAngle -= controls.nwAngle * controls.keyboard.recenterRatio * sensitivity;
+				} else if (ges.aircraft.controllers.yaw.recenter)
+				{	controls.yaw -= controls.yaw * controls.keyboard.recenterRatio * sensitivity;
+					if (notSteering) controls.nwAngle -= controls.nwAngle * controls.keyboard.recenterRatio * sensitivity; // recentre nosewheel if no other nosewheel input
+				}
+				ges.aircraft.animationValue.steeringAngle = controls.nwAngle;
+			};
+		}
+		if (typeof Aircraft === 'function')
 		{	V3.duplicate = V3.dup;
 			Aircraft.prototype.load = function ()
 			{	var load = Aircraft.prototype.load;
 				return function (aircraftName)
-				{	var oldkmlObjects = ges.aircraft.kmlObjects;
-					load.apply(this, arguments);
-					noseWheelSteering(aircraftName, oldkmlObjects);
+				{	var oldkmlObjects = ges.aircraft.kmlObjects; // allow us to keep track of whether the function has loaded new aircraft yet (async) 
+					load.apply(this, arguments); // call original aircraft load function
+					noseWheelSteering(aircraftName, oldkmlObjects); // call our nose wheel steering adjustment function
 				};
 			}();
-
-			function noseWheelSteering(aircraftName, kmlObjects)
-			{	if (ges.aircraft.kmlObjects === kmlObjects) // kmlObjects hasn't been replaced yet, i.e. ges.aircraft.load hasn't completed
-				{	setTimeout(function () { noseWheelSteering(aircraftName, kmlObjects); }, 50); // come again later
-					return;
-				}
-				var ratio;
-				function set(noseWheel, tillerNoseAngle, rudderNoseAngle)
-				{ 	return function ()
-					{	var anim = ges.aircraft.wheels[noseWheel].animations[0];
-						anim.value = "steeringAngle";
-						ratio = rudderNoseAngle / (anim.ratio = tillerNoseAngle);
-					};
-				}
-				var aircrafts = 
-					{ a380: set(4, 75, 7)
-					, md11: set(3, 70, 10)
-					, cessna: set(2, 30, 8.5)
-					, AN140: set(2, 35, 5) 
-					, concorde: set(2, 60, 10) 
-					, su35: set(4, 45, 5) 
-					, dc3: set(0, -45, -3) 
-					, alphajet: set(2, 35, 5) 
-					, zlin: set(2, -30, -2) };
-				(aircrafts[aircraftName] || function () { ratio = 1; })();
-				controls.nwAngle = 0;
-				controls.updateKeyboardGeneral = function (dt)
-				{	var throttleIncrement = controls.keyboard.throttleIncrement * dt;
-					if (controls.states.increaseThrottle) controls.throttle += throttleIncrement;
-					else if (controls.states.decreaseThrottle) controls.throttle -= throttleIncrement;
-					
-					var sensitivity = ges.preferences.keyboard.sensitivity * ges.aircraft.controllers.yaw.sensitivity;
-					var yawIncrement = controls.keyboard.yawIncrement * dt * sensitivity * ges.aircraft.controllers.yaw.ratio;
-					
-					var notSteering = false;
-					if (controls.states.steerLeft) controls.nwAngle = clamp(controls.nwAngle - yawIncrement, -1, 1);
-					else if (controls.states.steerRight) controls.nwAngle = clamp(controls.nwAngle + yawIncrement, -1, 1);
-					else notSteering = true;
-
-					if (controls.states.rudderLeft)
-					{	controls.yaw -= yawIncrement;
-						if (notSteering)
-							if (Math.abs(controls.nwAngle) < ratio) controls.nwAngle = clamp(controls.nwAngle - yawIncrement * ratio, -ratio, ratio);
-							else controls.nwAngle -= controls.nwAngle * controls.keyboard.recenterRatio * sensitivity;
-					} else if (controls.states.rudderRight)
-					{	controls.yaw += yawIncrement;
-						if (notSteering)
-							if (Math.abs(controls.nwAngle) < ratio) controls.nwAngle = clamp(controls.nwAngle + yawIncrement * ratio, -ratio, ratio);
-							else controls.nwAngle -= controls.nwAngle * controls.keyboard.recenterRatio * sensitivity;
-					} else if (ges.aircraft.controllers.yaw.recenter)
-					{	controls.yaw -= controls.yaw * controls.keyboard.recenterRatio * sensitivity;
-						if (notSteering) controls.nwAngle -= controls.nwAngle * controls.keyboard.recenterRatio * sensitivity;
-					}
-					ges.aircraft.animationValue.steeringAngle = controls.nwAngle;
-				};
-			}
 			clearInterval(b);
 		}
 	});
