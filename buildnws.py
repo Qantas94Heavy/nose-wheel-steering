@@ -88,7 +88,7 @@ print(json.JSONEncoder(separators=(',',':')).encode(d), end="", file=open(path +
 
 subprocess.check_call(['C:/Program Files (x86)/Google/Chrome/Application/chrome.exe', '--pack-extension=' + path, '--pack-extension-key=C:/Users/Karl Cheng/Desktop/' + setup + '.pem'], shell=False)
 
-zipfile = build + extension + '.zip'
+zipfile = build + 'zipped/' + extension + '.zip'
 try:
 	os.remove(zipfile)
 except OSError:
