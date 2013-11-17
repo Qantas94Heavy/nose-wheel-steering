@@ -3,6 +3,14 @@ README
 
 GEFS Nose Wheel Steering Plugin v0.1.4.1 for Google Chrome/Chromium 28+
 
+LICENSE
+-------
+
+This is free, open source software released under the GNU GPLv3. For the source
+code of this program, see <http://github.com/Qantas94Heavy/gefs-plugins>. The
+full license (GNU General Public License, Version 3) is available any time at
+<http://www.gnu.org/licenses/gpl-3.0.html>.
+
 INSTALLATION INSTRUCTIONS
 -------------------------
 
@@ -24,7 +32,7 @@ CHANGES SINCE v0.1.1
 
  - Fixed assortment of bugs, some internal improvements (refactoring)
 
-CHANGES SINCE v0.1.0
---------------------
+CHANGES SINCE v0.1.0 (initial release)
+--------------------------------------
 
  - Fixed conflict with Autopilot++ (formerly called Great Circle Plugin)
