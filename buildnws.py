@@ -34,19 +34,21 @@ arguments = parser.parse_args()
 version = arguments.version
 
 # stop calling the C drive - will break on OSX/Linux
+# FIXME: highly dependent on user setup, should make locations customisable
 node = 'C:/Web Server/nodejs/node.exe'
 userhome = 'C:/Users/Karl Cheng/'
 uglifyjs = userhome + 'node_modules/uglify-js/bin/uglifyjs'
 dropbox = userhome + 'Desktop/Dropbox/'
-base = dropbox + 'GitHub/gefs-plugins/'
+base = userhome + 'GitHub/gefs-plugins/'
+license = base + 'LICENSE.md'
 
 # perhaps make this more configurable through arguments
 root = base + 'nose_wheel_steering/'
 setup = 'gefs_nws-setup'
 folderShortName = 'nws'
 
-# TOFIX: I've been naughty and modified uglifyjs to add the --source-map-nopragma option: this will break if run somewhere else
-minified = subprocess.check_output([node, uglifyjs, root + 'code.user.js', '-c', '-m eval=true', '-b beautify=false,max-line-len=99999', '--source-map-nopragma', '--source-map-output'], shell=False).decode('utf-8').replace('\uFEFF', r'\uFEFF').replace('\\', r'\\').replace("'", r"\'").replace('\n', '').rstrip(';')
+# FIXME: I've been naughty and modified uglifyjs to add the --source-map-nopragma option: this will break if run somewhere else
+minified = subprocess.check_output([node, uglifyjs, root + 'code.user.js', '-c', '-m eval=true', '--define DEBUG=false', '-b beautify=false,max-line-len=99999', '--source-map-nopragma', '--source-map-output'], shell=False).decode('utf-8').replace('\uFEFF', r'\uFEFF').replace('\\', r'\\').replace("'", r"\'").replace('\n', '').rstrip(';')
 parts = minified.split('\x04')
 # get metadata from greasemonkey directives
 with open(root + 'code.user.js', encoding='utf-8') as file:
@@ -136,4 +138,4 @@ with open(root + 'README.txt') as file:
 	print(file.read().format(version), end='', file=open(readme, 'w', encoding='utf-8', newline='\r\n'))
 
 # zip the folder together for release
-subprocess.call(['C:/Program Files/7-Zip/7z.exe', 'a', '-tzip', '-mx9', '-mm=Deflate', zipfile, readme, userscript, pack + setup + '.crx'], shell=False)
+subprocess.call(['C:/Program Files/7-Zip/7z.exe', 'a', '-tzip', '-mx9', '-mm=Deflate', zipfile, readme, license, userscript, pack + setup + '.crx'], shell=False)

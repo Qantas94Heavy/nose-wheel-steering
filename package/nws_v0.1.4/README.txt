@@ -7,9 +7,10 @@ LICENSE
 -------
 
 This is free, open source software released under the GNU GPLv3. For the source
-code of this program, see <http://github.com/Qantas94Heavy/gefs-plugins>. The
-full license (GNU General Public License, Version 3) is available any time at
-<http://www.gnu.org/licenses/gpl-3.0.html>.
+code of this program, see <http://github.com/Qantas94Heavy/gefs-plugins>. You
+should be able to find the full license (GNU General Public License, Version 3)
+in the zip file, under the name "LICENSE.md". If not, please refer to the online
+version of the GPL at <http://www.gnu.org/licenses/gpl-3.0.html>.
 
 INSTALLATION INSTRUCTIONS
 -------------------------
@@ -21,6 +22,8 @@ INSTALLATION INSTRUCTIONS
 5. Drag and drop "gefs_nws-setup.crx" into the Extensions page.
 6. Click "Accept" when it asks for permissions.
 7. Installed!  Just open GEFS and try pressing the Z and X buttons! :D
+
+
 
 CHANGES SINCE v0.1.2 (last version)
 -----------------------------------
