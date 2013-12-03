@@ -39,7 +39,7 @@ node = 'C:/Web Server/nodejs/node.exe'
 userhome = 'C:/Users/Karl Cheng/'
 uglifyjs = userhome + 'node_modules/uglify-js/bin/uglifyjs'
 dropbox = userhome + 'Desktop/Dropbox/'
-base = userhome + 'GitHub/gefs-plugins/'
+base = userhome + 'GitHub/nose-wheel-steering/'
 license = base + 'LICENSE.md'
 
 # perhaps make this more configurable through arguments
