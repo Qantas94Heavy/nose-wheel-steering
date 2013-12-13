@@ -1,7 +1,7 @@
-gefs-plugins
-============
+Nose Wheel Steering
+===================
 
-The un-official repository of user created plugins for GEFS-Online (http://www.gefs-online.com), the free flight simulator based on the Google Earth Plugin.
+A plugin which allows steering using the X and Y keys instead of using the rudder. Designed for GEFS-Online (http://www.gefs-online.com), the free flight simulator based on the Google Earth Plugin.
 
 We recommend using Google Earth Plugin v6.2.2.6613, as later versions use a new terrain data model which makes GEFS unusuable.
 
