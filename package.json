@@ -1,0 +1,13 @@
+{ "name": "autopilot-pp-utilities"
+, "bugs": "https://github.com/Qantas94Heavy/autopilot-pp/issues"
+, "license": "GPL-3.0+"
+, "author": "Karl Cheng <qantas94heavy@gmail.com>"
+, "directories": {}
+, "repository":
+  { "type": "git"
+  , "url": "https://github.com/Qantas94Heavy/autopilot-pp.git"
+  }
+, "dependencies": { "robohydra": "0.5.x" }
+, "scripts": { "gefs": "robohydra -I ./ -n -P testing" }
+, "private": true
+}

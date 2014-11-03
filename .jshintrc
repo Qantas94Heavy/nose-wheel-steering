@@ -1,5 +1,5 @@
 { "globals":
-    { "ges": true
+  { "ges": true
 	, "V3": true
 	, "M33": true
 	, "ge": true
@@ -45,7 +45,6 @@
 	, "lookAt": true
 	, "SMOOTH_BUFFER": true
 	, "SMOOTHING_FACTOR": true
-	, "Aircraft": true
 	, "Persist": true
 	, "airDensitySL": true
 	, "feetToMeters": true
@@ -57,14 +56,12 @@
 	, "majorRunwayGrid": true
 	, "ll2xy": true
 	, "_gat": false
-	, "axisToIndex": true 
-	, "knotsToMs": true 
-	, "msToKnots": true
-	, "kmhToKnots": true }
+	, "axisToIndex": true
+  , "define": false
+  , "require": false
+  }
 , "laxcomma": true
 , "laxbreak": true
-, "es5": false
-, "es3": true
 , "eqnull": true
 , "smarttabs": true
 , "globalstrict": true
@@ -75,7 +72,7 @@
 , "devel": true
 , "debug": true
 , "funcscope": true
-, "unused": false
+, "unused": true
 , "bitwise": true
 , "boss": true
 , "-W079": false
