@@ -5,7 +5,7 @@
 // @match http://www.gefs-online.com/gefs.php*
 // @match http://gefs-online.com/gefs.php*
 // @run-at document-end
-// @version 0.2.0
+// @version 0.2.1
 // @grant none
 // ==/UserScript==
 
@@ -192,6 +192,7 @@ define('events/keydown',[],function () {
 });
 
 
+
 define('events/keyup',[],function () {
   var originalEventCleared = false;
   var originalHandler = controls.keyUp;
@@ -301,7 +302,9 @@ define('nosewheelsteering',[],function () {
       zlin: set(2, -30, -2),
       sportstar: set(2, 15, 0),
       // Boeing 777-300ER
-      67: set(2, 70, 7)
+      67: set(2, 70, 7),
+      // Bombardier Q400
+      80: set(2, 70, 8),
     };
 
     (aircrafts[aircraftName] || function () {
@@ -321,38 +324,55 @@ define('nosewheelsteering',[],function () {
       else if (controls.states.steerRight) controls.nwAngle = clamp(controls.nwAngle + yawIncrement, -1, 1);
       else notSteering = true;
       
+      function recenterNoseWheel() {
+        var nwIncrement = controls.keyboard.recenterRatio * sensitivity * ratio;
+      
+        if (controls.nwAngle < 0) controls.nwAngle += nwIncrement;
+        else controls.nwAngle -= nwIncrement;
+      }
+      
       if (controls.states.rudderLeft) {
         controls.yaw -= yawIncrement;
         
         if (notSteering) {
           // let nose wheel recentre if nose position beyond max rudder steering
-          if (Math.abs(controls.nwAngle) < ratio)
+          if (Math.abs(controls.nwAngle) < ratio) {
             controls.nwAngle = clamp(controls.nwAngle - yawIncrement * ratio, -ratio, ratio);
-          else
-            controls.nwAngle -= controls.nwAngle * controls.keyboard.recenterRatio * sensitivity;
+          }
+          else recenterNoseWheel();
         }
       } else if (controls.states.rudderRight) {
         controls.yaw += yawIncrement;
         
         if (notSteering) {
           // let nose wheel recentre if nose position beyond max rudder steering
-          if (Math.abs(controls.nwAngle) < ratio)
+          if (Math.abs(controls.nwAngle) < ratio) {
             controls.nwAngle = clamp(controls.nwAngle + yawIncrement * ratio, -ratio, ratio);
-          else
-            controls.nwAngle -= controls.nwAngle * controls.keyboard.recenterRatio * sensitivity;
+          }
+          else recenterNoseWheel();
         }
       } else if (ges.aircraft.controllers.yaw.recenter) {
         controls.yaw -= controls.yaw * controls.keyboard.recenterRatio * sensitivity;
-        if (notSteering)
-          controls.nwAngle -= controls.nwAngle * controls.keyboard.recenterRatio * sensitivity;  // recentre nosewheel if no other nosewheel input
+        // recenter nosewheel if no other nosewheel input
+        if (notSteering) recenterNoseWheel();
       }
+      
       ges.aircraft.animationValue.steeringAngle = controls.nwAngle;
     };
   }
 
   return noseWheelSteering;
 });
-
+// ==UserScript==
+// @name GEFS-Online Steering Addon (seperate rudder/nosewheel steering)
+// @description This extension (by Qantas 94 Heavy) allows rudder to be used without steering the nosewheel significantly.
+// @namespace GEFS-Plugins
+// @match http://www.gefs-online.com/gefs.php*
+// @match http://gefs-online.com/gefs.php*
+// @run-at document-end
+// @version 0.2.0
+// @grant none
+// ==/UserScript==
 
 
 
