@@ -22,7 +22,7 @@
   
         ges.communityAircraftMap = {};
         
-        ges.communityAircraftMap['23']='backend/aircraft/repository/test2_494_23';ges.communityAircraftMap['67']='backend/aircraft/repository/Boeing 777-300ER_933_67';ges.communityAircraftMap['68']='backend/aircraft/repository/Bombardier Dash 8 Q400_933_68';ges.communityAircraftMap['69']='backend/aircraft/repository/Boeing 737-700_933_69';ges.communityAircraftMap['70']='backend/aircraft/repository/Boeing 737-800_933_70';ges.communityAircraftMap['71']='backend/aircraft/repository/777-300ER_553_71';   
+        ges.communityAircraftMap['67']='backend/aircraft/repository/Boeing 777-300ER_933_67';ges.communityAircraftMap['69']='backend/aircraft/repository/Boeing 737-700_933_69';ges.communityAircraftMap['70']='backend/aircraft/repository/Boeing 737-800_933_70';ges.communityAircraftMap['71']='backend/aircraft/repository/777-300ER_553_71';ges.communityAircraftMap['80']='backend/aircraft/repository/Dash 8 Q400 final_933_80';ges.communityAircraftMap['81']='backend/aircraft/repository/Bombardier Dash 8 Q400_553_81';ges.communityAircraftMap['84']='backend/aircraft/repository/744 Test_553_84';ges.communityAircraftMap['85']='backend/aircraft/repository/757-300_553_85';   
       
   </script><script type="text/javascript">ges.PRODUCTION = true;ges.killCache = '1357828012';</script><script type="text/javascript" src="js/gefs.js?killcache=1357828012"></script><link rel="stylesheet" type="text/css" href="style/gefs.css?kc=123" media="screen"/><script type="text/javascript">
   var _gaq = _gaq || [];
@@ -647,7 +647,16 @@ google_ad_height = 15;
         				<!-- Aircraft selector -->
         				<div class="btn-group dropup">
         				  	<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Aircraft <span class="caret"></span></button>
-        				  	<ul class="dropdown-menu"> <li class="dropdown-submenu"><a href="#">Community contributed</a><ul class="dropdown-menu"><li><a href="#" onmouseup="ges.aircraft.change('67');">Boeing 777-300ER (by ✈ SWA 215 Heavy ✈ (UAE904))</a></li><iframe frame-border="no" class="gefs-shim-iframe"></iframe></ul></li>       						<li><a href="#" onmouseup="ges.aircraft.change('sopwith');">Sopwith Camel F.1</a></li>
+        				  	<ul class="dropdown-menu">
+                    <li class="dropdown-submenu">
+                      <a href="#">Community contributed</a>
+                      <ul class="dropdown-menu">
+                        <li><a href="#" onmouseup="ges.aircraft.change('67');">Boeing 777-300ER (by SuperCheese21)</a></li>
+                        <li><a href="#" onmouseup="ges.aircraft.change('80');">Bombardier Dash 8 Q400 (by SuperCheese21)</a></li>
+                        <iframe frame-border="no" class="gefs-shim-iframe"></iframe>
+                      </ul>
+                    </li>
+                    <li><a href="#" onmouseup="ges.aircraft.change('sopwith');">Sopwith Camel F.1</a></li>
         						<li><a href="#" onmouseup="ges.aircraft.change('cub');">Piper J-3 Cub</a></li>
         						<li><a href="#" onmouseup="ges.aircraft.change('sportstar');">Evektor Sportstar</a></li>		
         						<li><a href="#" onmouseup="ges.aircraft.change('alphajet');">Dassault-Dornier Alpha Jet</a></li>

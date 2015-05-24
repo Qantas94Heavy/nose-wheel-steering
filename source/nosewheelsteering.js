@@ -11,11 +11,12 @@ define(function () {
         ratio = rudderNoseAngle / tillerNoseAngle;
       };
     }
+    
     var aircrafts = {
-      a380: set(4, 75, 7),
+      a380: set(4, 70, 6),
       md11: set(3, 70, 10),
       cessna: set(2, 30, 8.5),
-      AN140: set(2, 45, 5),
+      AN140: set(2, 60, 5),
       concorde: set(2, 60, 10),
       su35: set(4, 45, 5),
       dc3: set(0, -45, -3),
@@ -24,8 +25,14 @@ define(function () {
       sportstar: set(2, 15, 0),
       // Boeing 777-300ER
       67: set(2, 70, 7),
+      // Boeing 737-700
+      69: set(0, 78, 7),
       // Bombardier Q400
       80: set(2, 70, 8),
+      // Boeing 747-200B
+      84: set(4, 70, 7),
+      // Boeing 787-8
+      114: set(2, 70, 8)
     };
 
     (aircrafts[aircraftName] || function () {

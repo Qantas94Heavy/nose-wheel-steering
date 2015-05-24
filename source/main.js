@@ -5,7 +5,7 @@
 // @match http://www.gefs-online.com/gefs.php*
 // @match http://gefs-online.com/gefs.php*
 // @run-at document-end
-// @version 0.2.1
+// @version 0.2.2
 // @grant none
 // ==/UserScript==
 
