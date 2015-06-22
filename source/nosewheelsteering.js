@@ -24,15 +24,17 @@ define(function () {
       zlin: set(2, -30, -2),
       sportstar: set(2, 15, 0),
       // Boeing 777-300ER
-      67: set(2, 70, 7),
+      161: set(2, 70, 7),
       // Boeing 737-700
-      69: set(0, 78, 7),
+      162: set(0, 78, 7),
       // Bombardier Q400
-      80: set(2, 70, 8),
-      // Boeing 747-200B
-      84: set(4, 70, 7),
+      163: set(2, 70, 8),
+      // Boeing 747-200B: set(4, 70, 7),
       // Boeing 787-8
-      114: set(2, 70, 8)
+      156: set(2, 65, 8),
+      167: set(2, 65, 8), 
+      // Boeing 757-300
+      164: set(0, 65, 8)
     };
 
     (aircrafts[aircraftName] || function () {
