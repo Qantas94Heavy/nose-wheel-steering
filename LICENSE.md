@@ -3,8 +3,7 @@ LICENSE
   
 Plugins for GEFS-Online -- improving the GEFS experience for everyone.  
 
-GEFS Code: Copyright © 2011 Xavier Tassin
-All other parts: Copyright © 2013 Karl Cheng
+Copyright (©) 2013-2015 Karl Cheng, 2015 Harry Xue
 
 If you'd like to contact me, please send an email to <qantas94heavy@gmail.com>.
 
