@@ -1,10 +1,29 @@
 Nose Wheel Steering
 ===================
 
-A plugin which allows steering using the X and Y keys instead of using the rudder. Designed for GEFS-Online (http://www.gefs-online.com), the free flight simulator based on the Google Earth Plugin.
+Nose Wheel Steering is an unofficial plugin for GEFS-Online
+(http://www.gefs-online.com), a free online flight simulator.
 
-We recommend using Google Earth Plugin v6.2.2.6613, as later versions use a new terrain data model which makes GEFS unusuable.
+It allows steering using the X and Y keys instead of using the rudder.
 
-If you're interested in asking and answering question about aviation, please commit to the Aviation Stack Exchange proposal: [http://area51.stackexchange.com/proposals/42572/aviation][1]
+License
+-------
 
-[1]: http://area51.stackexchange.com/proposals/42572/aviation?referrer=a7s8dKNNj010yA4lzeBZuw2
+    Copyright (c) 2013-2016 Karl Cheng
+    Copyright (c) 2015 Harry Xue
+
+    If you'd like to contact me, please send an email to
+    <qantas94heavy@gmail.com>.
+
+    This program is free software: you can redistribute it and/or modify it
+    under the terms of the GNU General Public License as published by the
+    Free Software Foundation, either version 3 of the License, or (at your
+    option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
