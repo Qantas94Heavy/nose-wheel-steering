@@ -1,0 +1,7 @@
+name = "Nose Wheel Steering"
+globalVariableName = "nws"
+shortName = "nws"
+crxName = "gefs_nws-setup"
+
+[requirejs]
+name = "main"
