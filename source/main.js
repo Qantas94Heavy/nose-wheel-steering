@@ -1,53 +1,83 @@
 'use strict';
 
 require([ 'nosewheelsteering' ], function (noseWheelSteering) {
-  var keyboardTimer = setInterval(function () {
-    if (!controls.airbrakes) return;
+  var NOSEWHEEL_LEFT = 'Tiller left (Ctrl + [key])';
+  var NOSEWHEEL_RIGHT = 'Tiller right (Ctrl + [key])';
+
+  // Only initialise Nose Wheel Steering when GeoFS is ready.
+  var initTimer = setInterval(function () {
+    if (typeof controls !== 'object' || !controls.airbrakes) return;
+
+    var keys = geofs.preferences.keyboard.keys;
+    var defaultKeys = geofs.preferencesDefault.keyboard.keys;
+
+    defaultKeys[NOSEWHEEL_LEFT] = { keycode: 188, label: '<' };
+    defaultKeys[NOSEWHEEL_RIGHT] = { keycode: 190, label: '>' };
+
+    if (!keys[NOSEWHEEL_LEFT]) keys[NOSEWHEEL_LEFT] = defaultKeys[NOSEWHEEL_LEFT];
+    if (!keys[NOSEWHEEL_RIGHT]) keys[NOSEWHEEL_RIGHT] = defaultKeys[NOSEWHEEL_RIGHT];
 
     $(document)
       .off('keydown', controls.keyDown)
       .off('keyup', controls.keyUp)
       .keydown(function (event) {
-        if (event.which === 90) {
-          // Z
+        // We don't care about anything else if steering key combination is pressed, so don't run
+        // the normal event handler.
+        if (event.ctrlKey && event.which === keys[NOSEWHEEL_LEFT].keycode) {
           controls.states.steerLeft = true;
+          controls.states.rudderLeft = false;
           event.preventDefault();
-        } else if (event.which === 88) {
-          // X
+        } else if (event.ctrlKey && event.which === keys[NOSEWHEEL_RIGHT].keycode) {
           controls.states.steerRight = true;
+          controls.states.rudderRight = false;
           event.preventDefault();
+        } else {
+          return controls.keyDown(event);
         }
-        else return controls.keyDown(event);
       }).keyup(function (event) {
-        if (event.which === 90) {
-          // Z
+        // This shows which key was released, so the keyup for each key will fire independently.
+        if (event.ctrlKey || event.which === keys[NOSEWHEEL_LEFT].keycode) {
           controls.states.steerLeft = false;
-          event.preventDefault();
-        } else if (event.which === 88) {
-          // X
-          controls.states.steerRight = false;
-          event.preventDefault();
         }
-        else return controls.keyUp(event);
+
+        if (event.ctrlKey || event.which === keys[NOSEWHEEL_RIGHT].keycode) {
+          controls.states.steerRight = false;
+        }
+
+        // Original keyup handler should still run.
+        return controls.keyUp(event);
       });
 
-    clearInterval(keyboardTimer);
+    var Aircraft = geofs.aircraft.Aircraft;
+    var load = Aircraft.prototype.load;
+    Aircraft.prototype.load = function (aircraftId, coordinates, bJustReload) {
+      // allow us to keep track of whether the function has loaded new aircraft yet (async)
+      var oldParts = geofs.aircraft.instance.parts;
+
+      // call original aircraft load function
+      load.apply(this, arguments);
+
+      var timer = setInterval(function () {
+        if (geofs.aircraft.instance.parts !== oldParts) {
+          // Aircraft load has completed.
+          noseWheelSteering(aircraftId);
+          clearInterval(timer);
+        }
+      }, 16);
+    };
+
+    if (geofs.aircraft.instance) {
+      // allow us to keep track of whether the function has loaded new aircraft yet (async)
+      var oldParts = geofs.aircraft.instance.parts;
+      var timer = setInterval(function () {
+        if (geofs.aircraft.instance.parts !== oldParts) {
+          // Aircraft load has completed.
+          noseWheelSteering(geofs.aircraft.instance.id);
+          clearInterval(timer);
+        }
+      }, 16);
+    }
+
+    clearInterval(initTimer);
   }, 16);
-
-  var load = Aircraft.prototype.load;
-  Aircraft.prototype.load = function (aircraftName, coordinates, bJustReload) {
-    // allow us to keep track of whether the function has loaded new aircraft yet (async)
-    var oldParts = gefs.aircraft.parts;
-
-    // call original aircraft load function
-    load.apply(this, arguments);
-
-    var timer = setInterval(function () {
-      if (gefs.aircraft.parts !== oldParts) {
-        // ges.aircraft.load has completed.
-        noseWheelSteering(aircraftName);
-        clearInterval(timer);
-      }
-    }, 16);
-  };
 });
