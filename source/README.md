@@ -101,9 +101,19 @@ You can get the source code of this program from
 Release Notes
 -------------
 
-### Changes in v0.3.0 (this version)
+### Changes in v1.0.0 (current version)
+
+ - **NOTE: you must uninstall any older versions of Nose Wheel Steering before
+   installing v1.0.0. This is because of the name change from GEFS to GeoFS.**
+ - Custom key bindings now available in the options menu!
+ - Changed default keys: "Ctrl" + "<" for left, "Ctrl" + ">" for right
+ - Fix compatibility with the change to new GeoFS (version 2.1)
+ - Add support for Cessna 172 and Boeing 737-700
+ - Improved, simplified logic for steering control
+
+### Changes in v0.3.0 (last version)
 
  - This version now supports the Cesium version of GEFS.
  - The README file is now converted to an HTML file for easier viewing.
- - New community contributed aircrft no longer require an update of
+ - New community contributed aircraft no longer require an update of
    the Nose Wheel Steering extension.

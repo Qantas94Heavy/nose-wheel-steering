@@ -1,11 +1,11 @@
 // ==UserScript==
-// @name GEFS-Online Steering Addon (seperate rudder/nosewheel steering)
+// @name GeoFS Nose Wheel Steering Addon
 // @author Qantas 94 Heavy
-// @description This extension allows rudder to be used without steering the nosewheel significantly.
+// @description Allows the aircraft rudder in GeoFS to be controlled separately to the nosewheel.
 // @namespace GEFS-Plugins
-// @match http://www.gefs-online.com/gefs.php*
-// @match http://gefs-online.com/gefs.php*
+// @match http://www.geo-fs.com/geofs.php*
+// @match http://geo-fs.com/geofs.php*
 // @run-at document-end
-// @version 0.3.0
+// @version 1.0.0
 // @grant none
 // ==/UserScript== 
