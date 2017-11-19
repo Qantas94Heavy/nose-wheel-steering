@@ -1,5 +1,5 @@
 { "globals":
-  { "gefs": true
+  { "geofs": true
   , "V3": true
   , "M33": true
   , "fixAngle": true
@@ -31,13 +31,10 @@
   , "lla2xyz": true
   , "xy2ll": true
   , "intersect_RayTriangle": true
-  , "swfobject": true
   , "Object3D": true
   , "rigidBody": true
   , "meridionalRadius": true
   , "lookAt": true
-  , "Aircraft": true
-  , "Persist": true
   , "airDensitySL": true
   , "feetToMeters": true
   , "viewportReferenceWidth": true
@@ -72,5 +69,5 @@
 , "-W058": false
 , "-W002": false
 , "-W004": false
-, "maxlen": 154
+, "maxlen": 99
 }
