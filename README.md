@@ -1,10 +1,11 @@
 Nose Wheel Steering
 ===================
 
-Nose Wheel Steering is an unofficial plugin for GEFS-Online
-(http://www.gefs-online.com), a free online flight simulator.
+Nose Wheel Steering is an unofficial extension for GeoFS
+(http://www.geo-fs.com), a free online flight simulator.
 
-It allows steering using the X and Y keys instead of using the rudder.
+It allows the steering of the aircraft to be controlled separately to the
+rudder.
 
 License
 -------
