@@ -17,36 +17,48 @@ require([ 'nosewheelsteering' ], function (noseWheelSteering) {
     if (!keys[NOSEWHEEL_LEFT]) keys[NOSEWHEEL_LEFT] = defaultKeys[NOSEWHEEL_LEFT];
     if (!keys[NOSEWHEEL_RIGHT]) keys[NOSEWHEEL_RIGHT] = defaultKeys[NOSEWHEEL_RIGHT];
 
-    $(document)
-      .off('keydown', controls.keyDown)
-      .off('keyup', controls.keyUp)
-      .keydown(function (event) {
-        // We don't care about anything else if steering key combination is pressed, so don't run
-        // the normal event handler.
-        if (event.ctrlKey && event.which === keys[NOSEWHEEL_LEFT].keycode) {
-          controls.states.steerLeft = true;
-          controls.states.rudderLeft = false;
-          event.preventDefault();
-        } else if (event.ctrlKey && event.which === keys[NOSEWHEEL_RIGHT].keycode) {
-          controls.states.steerRight = true;
-          controls.states.rudderRight = false;
-          event.preventDefault();
-        } else {
-          return controls.keyDown(event);
-        }
-      }).keyup(function (event) {
-        // This shows which key was released, so the keyup for each key will fire independently.
-        if (event.ctrlKey || event.which === keys[NOSEWHEEL_LEFT].keycode) {
-          controls.states.steerLeft = false;
-        }
+    var $document = $(document);
+    var oldKeyDown = controls.keyDown;
+    var oldKeyUp = controls.keyUp;
 
-        if (event.ctrlKey || event.which === keys[NOSEWHEEL_RIGHT].keycode) {
-          controls.states.steerRight = false;
-        }
+    $document
+      .off('keydown', oldKeyDown)
+      .off('keyup', oldKeyUp);
 
-        // Original keyup handler should still run.
-        return controls.keyUp(event);
-      });
+    // Reassign to keyUp/keyDown to allow other extensions to override these functions.
+    controls.keyDown = function (event) {
+      // We don't care about anything else if steering key combination is pressed, so don't run
+      // the normal event handler.
+      if (event.ctrlKey && event.which === keys[NOSEWHEEL_LEFT].keycode) {
+        controls.states.steerLeft = true;
+        controls.states.rudderLeft = false;
+        event.preventDefault();
+      } else if (event.ctrlKey && event.which === keys[NOSEWHEEL_RIGHT].keycode) {
+        controls.states.steerRight = true;
+        controls.states.rudderRight = false;
+        event.preventDefault();
+      } else {
+        return oldKeyDown(event);
+      }
+    };
+
+    controls.keyUp = function (event) {
+      // This shows which key was released, so the keyup for each key will fire independently.
+      if (event.ctrlKey || event.which === keys[NOSEWHEEL_LEFT].keycode) {
+        controls.states.steerLeft = false;
+      }
+
+      if (event.ctrlKey || event.which === keys[NOSEWHEEL_RIGHT].keycode) {
+        controls.states.steerRight = false;
+      }
+
+      // Original keyup handler should still run.
+      return oldKeyUp(event);
+    };
+
+    $document
+      .keydown(controls.keyDown)
+      .keyup(controls.keyUp);
 
     var Aircraft = geofs.aircraft.Aircraft;
     var load = Aircraft.prototype.load;
