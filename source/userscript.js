@@ -6,6 +6,6 @@
 // @match http://www.geo-fs.com/geofs.php*
 // @match http://geo-fs.com/geofs.php*
 // @run-at document-end
-// @version 1.0.0
+// @version 1.0.1
 // @grant none
 // ==/UserScript== 

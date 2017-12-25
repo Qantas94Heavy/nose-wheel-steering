@@ -101,7 +101,12 @@ You can get the source code of this program from
 Release Notes
 -------------
 
-### Changes in v1.0.0 (current version)
+### Changes in v1.0.1 (current version)
+
+ - Fix landing gear and steering problems with the new Embraer Phenom 100
+ - Fix steering settings for the Douglas DC-3
+
+### Changes in v1.0.0 (last version)
 
  - **NOTE: you must uninstall any older versions of Nose Wheel Steering before
    installing v1.0.0. This is because of the name change from GEFS to GeoFS.**
@@ -111,7 +116,7 @@ Release Notes
  - Add support for Cessna 172 and Boeing 737-700
  - Improved, simplified logic for steering control
 
-### Changes in v0.3.0 (last version)
+### Changes in v0.3.0
 
  - This version now supports the Cesium version of GEFS.
  - The README file is now converted to an HTML file for easier viewing.
