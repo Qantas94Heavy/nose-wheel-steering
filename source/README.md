@@ -22,8 +22,6 @@ developer of the aircraft to add support for Nose Wheel Steering.
 Installation Instructions
 -------------------------
 
-> Please note that Internet Explorer is *not* supported.
-
 ### Firefox (recommended):
 
 1. Install Greasemonkey, if you have not already done so.
@@ -41,6 +39,8 @@ Installation Instructions
 6. Click "Install" in the window that appears.
 
 ### Microsoft Edge (14.14393+):
+
+> Please note that Internet Explorer is *not* supported.
 
 1. Install Tampermonkey, if you have not already done so.
 2. Extract this ZIP file into an empty folder.
@@ -101,12 +101,17 @@ You can get the source code of this program from
 Release Notes
 -------------
 
-### Changes in v1.0.1 (current version)
+### Changes in v1.0.2 (current version)
+
+ - Add nosewheel steering parameters for new DHC-6 Twin Otter aircraft
+ - Fix steering settings for existing planes affected by aircraft ID changes
+
+### Changes in v1.0.1 (last version)
 
  - Fix landing gear and steering problems with the new Embraer Phenom 100
  - Fix steering settings for the Douglas DC-3
 
-### Changes in v1.0.0 (last version)
+### Changes in v1.0.0
 
  - **NOTE: you must uninstall any older versions of Nose Wheel Steering before
    installing v1.0.0. This is because of the name change from GEFS to GeoFS.**
