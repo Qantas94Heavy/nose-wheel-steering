@@ -10,7 +10,7 @@ rudder.
 License
 -------
 
-    Copyright (c) 2013-2017 Karl Cheng
+    Copyright (c) 2013-2018 Karl Cheng
     Copyright (c) 2015 Harry Xue
 
     If you'd like to contact me, please send an email to
