@@ -2,19 +2,23 @@
 
 define(function () {
   // Default aircraft do not have nosehweel angles specified.
+  // ^1: In the real DHC-6, there is no mechanical linkage between NWS and rudder.
+  // However because there is no differential braking in GeoFS I have added a small
+  // deflection to make it easier to steer.
   var defaultAircrafts =
     { '2': [ 2, 30, 10 ] // Cessna 172
     , '3': [ 2, 35, 5 ] // Alphajet
     , '4': [ 2, 78, 7 ] // Boeing 737-700
     , '5': [ 2, 35, 18.3 ] // Embraer Phenom 100
-    , '6': [ 0, -45, -3 ] // DC-3
-    , '7': [ 3, 70, 10 ] // MD11
-    , '8': [ 4, 45, 5 ] // SU-35
-    , '9': [ 4, 70, 6 ] // A380
-    , '10': [ 2, 60, 10 ] // Concorde
-    , '11': [ 2, -30, -2 ] // Zlin Z-50
-    , '12': [ 2, 30, 8.5 ] // Cessna 152
-    , '16': [ 2, 60, 5 ] // An-140
+    , '6': [ 2, 60, 5 ] // DHC-6 Twin Otter^1
+    , '16': [ 0, -45, -3 ] // DC-3
+    , '17': [ 3, 70, 10 ] // MD11
+    , '18': [ 4, 45, 5 ] // SU-35
+    , '19': [ 4, 70, 6 ] // A380
+    , '20': [ 2, 60, 10 ] // Concorde
+    , '21': [ 2, -30, -2 ] // Zlin Z-50
+    , '22': [ 2, 30, 8.5 ] // Cessna 152
+    , '26': [ 2, 60, 5 ] // An-140
     , '40': [ 2, 15, 0 ] // Sportstar
     };
 
