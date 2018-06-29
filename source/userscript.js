@@ -5,6 +5,8 @@
 // @namespace GEFS-Plugins
 // @match http://www.geo-fs.com/geofs.php*
 // @match http://geo-fs.com/geofs.php*
+// @match https://www.geo-fs.com/geofs.php*
+// @match https://geo-fs.com/geofs.php*
 // @run-at document-end
 // @version 1.0.2
 // @grant none
