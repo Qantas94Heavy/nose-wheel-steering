@@ -101,12 +101,16 @@ You can get the source code of this program from
 Release Notes
 -------------
 
-### Changes in v1.0.2 (current version)
+### Changes in v1.0.3 (current version)
+
+ - Add support for HTTPS version of GeoFS
+
+### Changes in v1.0.2 (last version)
 
  - Add nosewheel steering parameters for new DHC-6 Twin Otter aircraft
  - Fix steering settings for existing planes affected by aircraft ID changes
 
-### Changes in v1.0.1 (last version)
+### Changes in v1.0.1
 
  - Fix landing gear and steering problems with the new Embraer Phenom 100
  - Fix steering settings for the Douglas DC-3
